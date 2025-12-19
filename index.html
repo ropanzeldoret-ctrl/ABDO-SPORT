@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>365 ABDO SPORT | النسخة المعتمدة</title>
+    <style>
+        :root { --gold: #ffd700; --bg: #0b0e11; --card: #1c2127; --blue: #007fff; }
+        body, html { margin: 0; padding: 0; background: var(--bg); color: white; font-family: sans-serif; overflow-x: hidden; }
+
+        /* شاشة البداية */
+        #splash {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: black; z-index: 9999; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+        }
+        .glitch { font-size: 45px; font-weight: 900; color: var(--gold); text-shadow: 2px 2px red; }
+
+        /* الواجهة الرئيسية */
+        #main-app { display: none; }
+        .header { 
+            background: var(--card); padding: 15px; text-align: center; 
+            border-bottom: 3px solid var(--gold); display: flex; 
+            justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 100;
+        }
+        .game-btn { background: var(--blue); color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        
+        .news-container { padding: 15px; max-width: 600px; margin: auto; }
+        .news-card { background: var(--card); margin-bottom: 20px; border-radius: 12px; overflow: hidden; border: 1px solid #333; }
+        .news-img { width: 100%; height: 200px; object-fit: cover; }
+        .news-info { padding: 15px; }
+        .tag { color: var(--gold); font-size: 12px; font-weight: bold; border: 1px solid var(--gold); padding: 2px 5px; border-radius: 3px; }
+
+        /* نافذة اللعبة */
+        #game-modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); z-index: 20000; justify-content: center; align-items: center;
+        }
+        .game-box { background: var(--card); padding: 20px; border-radius: 15px; width: 85%; max-width: 350px; text-align: center; }
+        .opt-btn { background: var(--blue); color: white; border: none; padding: 10px; margin: 5px; width: 100%; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body onclick="startExperience()">
+
+<audio id="thunder" src="https://www.soundjay.com/nature/thunder-strike-1.mp3"></audio>
+<audio id="crowd" src="https://www.soundjay.com/misc/sounds/stadium-crowd-1.mp3" loop></audio>
+
+<div id="splash">
+    <div class="glitch">ABDO SPORT</div>
+    <p style="color: var(--gold); margin-top: 20px;">انقر في أي مكان للدخول وسماع الهتاف ⚽</p>
+</div>
+
+<div id="main-app">
+    <div class="header">
+        <button class="game-btn" onclick="openGame()">🎮 خمن اللاعب</button>
+        <h2 style="margin: 0; font-size: 18px; color: var(--gold);">365 ABDO SPORT</h2>
+        <div style="width: 80px;"></div>
+    </div>
+
+    <div class="news-container" id="news-feed"></div>
+</div>
+
+<div id="game-modal">
+    <div class="game-box">
+        <h3 style="color: var(--gold);">من هذا اللاعب؟</h3>
+        <img id="q-img" src="" style="width: 100%; border-radius: 10px; margin-bottom: 10px;">
+        <div id="options"></div>
+        <button onclick="closeGame()" style="margin-top: 15px; background: none; color: white; border: 1px solid white; padding: 5px 10px;">إغلاق</button>
+    </div>
+</div>
+
+<script>
+    const news = [
+        { cat: "FIFA THE BEST 2025", img: "https://images.unsplash.com/photo-1574629810360-7efbbe195018", txt: "رسمياً: ديمبيلي يتوج بجائزة الأفضل من الفيفا كأفضل لاعب في العالم." },
+        { cat: "كأس العرب 2025", img: "https://images.unsplash.com/photo-1522778119026-d647f0596c20", txt: "المغرب بطلاً للعرب: احتفالات تاريخية في شوارع الرباط بعد التتويج." },
+        { cat: "مونديال 2026", img: "
